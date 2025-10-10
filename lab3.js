@@ -39,6 +39,12 @@ const analyticsData = [
   const getEngagementLevel = (user) => {
     // TODO: use if/else or ternary operator
     // Hint: Check if user.avgSessionDuration >= 200
+    if (user.avgSessionDuration >= 200) {
+      return "Good";
+    }
+    else {
+      return "Low";
+    }
   };
   
   /**
@@ -50,6 +56,15 @@ const analyticsData = [
   const findLongestSessionUser = (data) => {
     // TODO: use for loop
     // Hint: Keep track of max duration and corresponding user name
+    let maxUser = data[0];
+
+    for (let i = 0; i < data.length; i++) {
+      if (maxUser.avgSessionDuration < data[i].avgSessionDuration) {
+        maxUser = data[i];
+      }
+    }
+
+    return maxUser.name;
   };
   
   /**
@@ -61,6 +76,15 @@ const analyticsData = [
   const formatSessions = (data) => {
     // TODO: use map
     // Hint: Use template literal `${user.name}: ${user.totalSessions} sessions`
+    let result = [];
+
+    for (let i = 0; i < data.length; i++) {
+      user = data[i]
+      userString = `${user.name}: ${user.totalSessions} sessions`;
+      result.push(userString);
+    }
+
+    return result;
   };
   
   /**
@@ -72,6 +96,12 @@ const analyticsData = [
   const getActiveUsers = (data) => {
     // TODO: use filter + map
     // Hint: First filter users with totalSessions >= 5, then map to get names
+   
+    filteredUsers = data.filter(user => user.totalSessions >= 5)
+
+    result = filteredUsers.map(user => user.name)
+
+    return result
   };
   
   /**
@@ -83,6 +113,10 @@ const analyticsData = [
   const getTotalSessions = (data) => {
     // TODO: use reduce
     // Hint: Accumulate user.totalSessions
+
+    result = data.reduce((sum, user) => sum + user.totalSessions, 0)
+
+    return result
   };
   
   // ========================================
